@@ -1,0 +1,17 @@
+{% extends 'AppBicis/padre.html' %}
+{% load static %}
+{% block formulario %}
+    <form action="/AppBicis/biciVender/" method="POST">  {% csrf_token %}
+
+        <p> Bici: <input type="text" name="bici"></p>
+        <p> Tipo: <input type="text" name="tipo"></p>
+        <p> Precio: <input type="text" name="precio"></p>
+        <p> Email: <input type="text" name="vendEmail"></p>
+        <p> Tel: <input type="text" name="vendTel"></p>
+
+
+        <input type="submit" value="ENVIAR">
+
+    </form>
+
+{% endblock%}
