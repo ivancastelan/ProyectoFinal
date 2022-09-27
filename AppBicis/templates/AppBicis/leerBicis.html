@@ -1,0 +1,15 @@
+{% extends 'AppBicis/padre.html' %}
+{% load static %}
+{% block formulario %}
+    
+{% for bicis in biclas %}
+
+<p> Bici: {{bicis.bici}}</p>
+<p> Tipo: {{bicis.tipo}}</p>
+<p> Precio: {{bicis.precio}}</p>
+<p> -------------------------</p>
+
+
+
+{% endfor %}
+{% endblock %}

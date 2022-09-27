@@ -23,3 +23,6 @@ class FormularioBiciCamb(forms.Form):
     bici = forms.CharField()
     tipo = forms.CharField()
     precio = forms.IntegerField()
+
+
+

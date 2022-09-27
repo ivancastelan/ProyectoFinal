@@ -12,9 +12,11 @@
     </p>
     
     {% for tipo in bicicletas %}
-     <p> Nombre: {{bicicletas.nombre}}  </p>
-     <p> Tipo: {{bicicletas.tipo}}  </p>
-     <p> Precio: {{bicicletas.precio}}  </p>
+     <p> Nombre: {{tipo.bici}}  </p>
+     <p> Tipo: {{tipo.tipo}}  </p>
+     <p> Precio: {{tipo.precio}}  </p>
+     <p> ------------------------ </p>
+
 
     {% endfor %}
 

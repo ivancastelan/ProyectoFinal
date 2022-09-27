@@ -78,3 +78,37 @@ def resultadoBusqueda(request):
         respuesta = "No ingresaste datos. Intenta de nuevo."
 
     return HttpResponse(respuesta)
+
+
+def leerBicis(request):
+
+    bicis = VenderBici.objects.all()
+
+    contexto = {"biclas": bicis}
+
+    return render(request, "AppBicis/leerBicis.html", contexto)
+
+
+
+def crearBici(request):
+
+    if request.method=="POST":
+
+        datosVend = FormularioDatosV(request.POST)
+        if datosVend.is_valid():
+
+            info = datosVend.cleaned_data
+
+            vend = DatosVend(nombre=info["nombre"],
+            edad = info["edad"],
+            direccion = info["direccion"],
+            correo = info["correo"],
+            telefono = info["telefono"])
+            vend.save()
+
+            return render(request, "AppBicis/inicio.html")
+        
+    else:
+        datosVend: FormularioDatosV()
+        
+    return render(request, "AppBicis/datosVend.html", {"formVend":datosVend})

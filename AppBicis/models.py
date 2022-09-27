@@ -4,6 +4,9 @@ from django.db import models
 
 class VenderBici(models.Model):
 
+    def __str__(self):
+        return f"Bicicleta {self.bici}"
+
     bici = models.CharField(max_length=40)
     tipo = models.CharField(max_length=25)
     precio = models.IntegerField()
@@ -21,6 +24,9 @@ class DatosVend(models.Model):
 
 
 class BiciCambiar(models.Model):
+
+    def __str__(self):
+        return f"Bicicleta {self.bici}"
 
     bici = models.CharField(max_length=40)
     tipo = models.CharField(max_length=25)
