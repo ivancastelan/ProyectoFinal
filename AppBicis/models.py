@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class BiciVender(models.Model):
+class VenderBici(models.Model):
 
     bici = models.CharField(max_length=40)
     tipo = models.CharField(max_length=25)

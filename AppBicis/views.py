@@ -10,21 +10,7 @@ def home(request):
     return render(request, "AppBicis/inicio.html")
 
 
-def BiciVender(request):
 
-    if request.method=="POST":
-
-        biciV = BiciVender(bici=request.POST["bici"],
-        tipo=request.POST["tipo"],
-        precio=request.POST["precio"],
-        vendEmail=request.POST["vendEmail"],
-        vendTel=request.POST["vendTel"],)
-
-        return render(request, "AppBicis/inicio.html")
-        
-    return render(request, "AppBicis/biciVender.html")
-
-"""""""""""""""
 def BiciVender(request):
 
     if request.method=="POST":
@@ -32,20 +18,63 @@ def BiciVender(request):
         biciVender = FormularioBiciVend(request.POST)
         if biciVender.is_valid():
 
-            info = FormularioBiciVend.cleaned_data
+            info = biciVender.cleaned_data
 
-            biciF = BiciVender(bici=info["bici"])
-            tipo = info["tipo"]
-            precio = info["precio"]
-            vendEmail = info["vendEmail"]
-            vendTel = info["vendTel"]
-
+            biciF = VenderBici(bici=info["bici"],
+            tipo = info["tipo"],
+            precio = info["precio"],
+            vendEmail = info["vendEmail"],
+            vendTel = info["vendTel"])
             biciF.save()
+
             return render(request, "AppBicis/inicio.html")
         
     else:
         biciVender: FormularioBiciVend()
         
     return render(request, "AppBicis/biciVender.html")
-"""""""""
+
+
+
+def CambiarBici(request):
+
+    if request.method=="POST":
+
+        biciCambiar = FormularioBiciCamb(request.POST)   
+
+        if biciCambiar.is_valid():
+
+            info = biciCambiar.cleaned_data
+
+            biciF = BiciCambiar(bici=info["bici"],
+            tipo = info["tipo"],
+            precio = info["precio"])
+            biciF.save()
+
+            return render(request, "AppBicis/inicio.html")
+        
+    else:
+        biciCambiar: FormularioBiciCamb()
+
+    return render(request, "AppBicis/biciCambiar.html")
     
+
+
+
+def busquedaBici(request):
+
+    return render(request, "AppBicis/buscarBicis.html")
+
+
+def resultadoBusqueda(request):
+
+    if request.GET['tipo']:
+
+        tipo = request.GET['tipo']
+        bicisTipo = VenderBici.objects.filter(tipo__icontains=tipo)
+        return render(request, 'AppBicis/resultado.html', {"bicicletas": bicisTipo, "tipo":tipo})
+
+    else:
+        respuesta = "No ingresaste datos. Intenta de nuevo."
+
+    return HttpResponse(respuesta)

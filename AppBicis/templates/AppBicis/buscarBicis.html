@@ -1,0 +1,14 @@
+{% extends 'AppBicis/padre.html' %}
+{% load static %}
+{% block formulario %}
+
+    <form action="/AppBicis/resultado/" method="GET">
+
+        <p>Escribe el tipo de bicicleta que buscas</p>
+        <input type="text" name="tipo" id="tipo">
+        <input type="submit" value="Buscar">
+
+
+    </form>
+    
+    {% endblock %}
