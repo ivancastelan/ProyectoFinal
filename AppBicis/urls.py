@@ -12,6 +12,8 @@ urlpatterns = [
    #CRUD - Create, Read, Update and Delete
     path('leerBicis/', leerBicis, name="LeerBiclas"),
     path('crearDatos/', crearBici, name="CrearBiclas"),
+    path('borrarBici/<biciNombre>', eliminarBici, name="BorrarBiclas"),
+    path('editarBici/<biciNombre>', editarDatos, name="EditarBiclas"),
 
 
 

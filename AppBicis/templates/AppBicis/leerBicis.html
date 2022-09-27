@@ -7,6 +7,13 @@
 <p> Bici: {{bicis.bici}}</p>
 <p> Tipo: {{bicis.tipo}}</p>
 <p> Precio: {{bicis.precio}}</p>
+<button>
+    <a href="{% url 'BorrarBiclas' bicis.bici %}">Borrar artículo </a>
+</button>
+<button>
+    <a href="{% url 'EditarBiclas' bicis.bici %}"> Editar artículo</a>
+
+</button>
 <p> -------------------------</p>
 
 
