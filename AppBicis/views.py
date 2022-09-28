@@ -3,6 +3,8 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
 from .forms import *
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 
 # Create your views here.
@@ -135,7 +137,7 @@ def editarDatos(request, biciNombre):
 
     if request.method=="POST":
 
-            datosBici = VenderBici(request.POST)
+            datosBici = FormularioBiciVend(request.POST)
             if datosBici.is_valid():
 
                 info = datosBici.cleaned_data
@@ -156,3 +158,35 @@ def editarDatos(request, biciNombre):
 
     contexto = {"DatosBici":biciDatos, "bicis":biciNombre}    
     return render(request, "AppBicis/editarBicis.html", contexto)
+
+####################
+
+def iniciarSesion(request):
+
+    if request.method=="POST":
+
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+
+            usuario = form.cleaned_data.get("username")
+            contra = form.cleaned_data.get("password")
+
+            user = authenticate(username=usuario, password=contra)
+
+            if user != None:
+
+                login(request, user)
+                return render(request, "AppBicis/inicio.html", {"mensaje": f"Hola, {user}"})
+            
+        else:
+
+            return render(request, "AppBicis/inicio.html", {"mensaje": f"Datos incorrectos. Intente de nuevo."})
+        
+    else: 
+            
+        form = AuthenticationForm()
+        
+    return render(request, "AppBicis/login.html", {"formLogin":form})
+
+
+

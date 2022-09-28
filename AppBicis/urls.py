@@ -15,6 +15,9 @@ urlpatterns = [
     path('borrarBici/<biciNombre>', eliminarBici, name="BorrarBiclas"),
     path('editarBici/<biciNombre>', editarDatos, name="EditarBiclas"),
 
+    path('login/', iniciarSesion, name="LogIn"),
+
+
 
 
 
